@@ -10,36 +10,20 @@ public class Varasto {
     public Varasto(double tilavuus) {  // tilavuus on annettava
         if (tilavuus > 0.0) {
             this.tilavuus = tilavuus;
-        } else // virheellinen, nollataan
-        {
+        } else {
             this.tilavuus = 0.0;  // => käyttökelvoton varasto
         }
         saldo = 0;     // oletus: varasto on tyhjä
     }
 
     public Varasto(double tilavuus, double alkuSaldo) { // kuormitetaan
-        for (int i = 0; i < tilavuus; i++) {
-            for (int j = 0; j < alkuSaldo; j++) {
-                System.out.println(i + j);
-            }
-        }
-        
         if (tilavuus > 0.0) {
             this.tilavuus = tilavuus;
-            if (alkuSaldo > 0.0) {
-                if (alkuSaldo <= tilavuus) {
-                this.saldo = alkuSaldo;
-                } else {
-                this.saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
-                }
-                } else {
-                this.saldo = 0.0;
-            }
-        } else // virheellinen, nollataan
-        {
+        } else {
             this.tilavuus = 0.0;  // => käyttökelvoton varasto
-            this.saldo = 0.0;
         }
+        this.saldo = 0.0;
+        this.lisaaVarastoon(alkuSaldo);
     }
 
     // --- ottavat aksessorit eli getterit: ---
@@ -57,12 +41,10 @@ public class Varasto {
 
     // --- asettavat aksessorit eli setterit: ---
     public void lisaaVarastoon(double maara) {
-        if (maara < 0) // virhetilanteessa voidaan tehdä 
-        {
+        if (maara < 0) {
             return;       // tällainen pikapoistuminenkin!
         }
-        if (maara <= paljonkoMahtuu()) // omia aksessoreita voi kutsua
-        {
+        if (maara <= paljonkoMahtuu()) {
             saldo = saldo + maara;          // ihan suoraan sellaisinaan
         } else {
             saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
@@ -70,8 +52,7 @@ public class Varasto {
     }
 
     public double otaVarastosta(double maara) {
-        if (maara < 0) // virhetilanteessa voidaan tehdä 
-        {
+        if (maara < 0) {
             return 0.0;   // tällainen pikapoistuminenkin!
         }
         if (maara > saldo) {          // annetaan mitä voidaan
