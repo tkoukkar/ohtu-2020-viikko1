@@ -18,19 +18,27 @@ public class Varasto {
     }
 
     public Varasto(double tilavuus, double alkuSaldo) { // kuormitetaan
+        for (int i = 0; i < tilavuus; i++) {
+            for (int j = 0; j < alkuSaldo; j++) {
+                System.out.println(i + j);
+            }
+        }
+        
         if (tilavuus > 0.0) {
             this.tilavuus = tilavuus;
+            if (alkuSaldo > 0.0) {
+                if (alkuSaldo <= tilavuus) {
+                this.saldo = alkuSaldo;
+                } else {
+                this.saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
+                }
+                } else {
+                this.saldo = 0.0;
+            }
         } else // virheellinen, nollataan
         {
             this.tilavuus = 0.0;  // => käyttökelvoton varasto
-        }
-        if (alkuSaldo < 0.0) {
             this.saldo = 0.0;
-        } else if (alkuSaldo <= tilavuus) // mahtuu
-        {
-            this.saldo = alkuSaldo;
-        } else {
-            this.saldo = tilavuus;  // täyteen ja ylimäärä hukkaan!
         }
     }
 
